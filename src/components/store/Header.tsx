@@ -47,7 +47,7 @@ export function SiteHeader({
 
           <Link href="/" className="group shrink-0">
             <span className="font-display text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
-              Domo<span className="text-volt">Volt</span>
+              Texno<span className="text-volt">House</span>
             </span>
             <span className="mt-0.5 block text-[10px] font-medium uppercase tracking-[0.18em] text-ink-muted sm:text-[11px]">
               {settings.tagline}
@@ -122,7 +122,7 @@ export function SiteHeader({
           <aside className="absolute left-0 top-0 flex h-full w-[84%] max-w-sm flex-col bg-white shadow-2xl animate-fadeUp">
             <div className="flex items-center justify-between border-b px-4 py-4">
               <span className="font-display text-xl font-bold">
-                Domo<span className="text-volt">Volt</span>
+                Texno<span className="text-volt">House</span>
               </span>
               <button type="button" onClick={() => setOpen(false)} aria-label="Затвори">
                 <X className="h-6 w-6" />

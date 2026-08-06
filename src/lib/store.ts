@@ -10,10 +10,10 @@ import type {
 } from "./types";
 
 export const defaultSettings: SiteSettings = {
-  brandName: "DomoVolt",
+  brandName: "TexnoHouse",
   tagline: "Всичко за дома и кухнята",
   phone: "+359 883 349 895",
-  email: "office@domovolt.bg",
+  email: "office@texnohouse.com",
   address: 'гр. София, жк. "Лев Толстой" бл.40 вх. A ет.3 ап.9',
   company: '"АДИ ЕЛЕКТРОНИКС" ЕООД',
   eik: "206467532",
@@ -21,7 +21,7 @@ export const defaultSettings: SiteSettings = {
   currencySymbol: "€",
   freeShippingFrom: 50,
   announcement: "Безплатна доставка над 50 € · Бърза обработка на поръчки",
-  logoText: "DomoVolt",
+  logoText: "TexnoHouse",
 };
 
 export const defaultHeader: HeaderConfig = {
@@ -53,7 +53,7 @@ export const defaultHeader: HeaderConfig = {
 
 export const defaultFooter: FooterConfig = {
   showNewsletter: false,
-  bottomText: "© DomoVolt. Всички права запазени.",
+  bottomText: "© TexnoHouse. Всички права запазени.",
   social: [],
   columns: [
     {

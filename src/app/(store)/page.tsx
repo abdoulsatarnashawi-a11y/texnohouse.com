@@ -52,7 +52,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-7xl px-4 pb-20">
         <div className="overflow-hidden rounded-[2rem] bg-ink px-6 py-12 text-white sm:px-12">
           <p className="font-display text-3xl font-bold sm:text-5xl">
-            Domo<span className="text-volt-bright">Volt</span>
+            Texno<span className="text-volt-bright">House</span>
           </p>
           <p className="mt-4 max-w-2xl text-white/75">
             Готови сте за нов уред или кухненски аксесоар? Разгледайте целия каталог —

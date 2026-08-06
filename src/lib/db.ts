@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 
 const dataDir = path.join(process.cwd(), "data");
-const dbPath = path.join(dataDir, "domovolt.db");
+const dbPath = path.join(dataDir, "texnohouse.db");
 
 let db: Database.Database | null = null;
 

@@ -1,6 +1,6 @@
-# DomoVolt
+# TexnoHouse
 
-متجر إلكتروني حديث وديناميكي مبني على محتوى [TexnoHouse](https://www.texnohouse.com/) مع اسم العلامة الجديد **DomoVolt**.
+متجر إلكتروني حديث وديناميكي مبني على محتوى [TexnoHouse](https://www.texnohouse.com/) مع اسم العلامة الجديد **TexnoHouse**.
 
 ## المميزات
 
@@ -17,7 +17,7 @@
 
 ```bash
 npm install
-npm run seed    # يبني data/domovolt.db من data/catalog.json
+npm run seed    # يبني data/texnohouse.db من data/catalog.json
 npm run dev     # http://localhost:3000
 ```
 
@@ -25,7 +25,7 @@ npm run dev     # http://localhost:3000
 
 - العنوان: `/admin/login`
 - المستخدم: `admin`
-- كلمة المرور: `DomoVolt2026!`
+- كلمة المرور: `TexnoHouse2026!`
 
 غيّرها عبر متغيرات البيئة `ADMIN_USER` / `ADMIN_PASSWORD` / `ADMIN_SECRET` قبل إعادة `npm run seed`.
 
@@ -59,5 +59,5 @@ npm run seed     # يعيد بناء قاعدة البيانات
 - `src/app/(store)` — واجهة المتجر
 - `src/app/admin` — لوحة التحكم
 - `data/catalog.json` — نسخة مسحوبة من الأصل
-- `data/domovolt.db` — قاعدة SQLite التشغيلية
+- `data/texnohouse.db` — قاعدة SQLite التشغيلية
 - `scripts/seed.ts` / `scripts/scrape_texnohouse.py`

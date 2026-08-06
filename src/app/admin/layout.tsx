@@ -22,7 +22,7 @@ export default async function AdminLayout({
       <div className="flex min-h-screen">
         <aside className="hidden w-60 shrink-0 border-r border-white/10 bg-black/20 p-4 md:block">
           <Link href="/admin" className="font-display text-xl font-bold">
-            Domo<span className="text-teal-400">Volt</span> Admin
+            Texno<span className="text-teal-400">House</span> Admin
           </Link>
           <nav className="mt-8 space-y-1 text-sm">
             {[

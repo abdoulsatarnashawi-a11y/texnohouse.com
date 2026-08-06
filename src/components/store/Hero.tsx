@@ -18,7 +18,7 @@ export function Hero() {
 
       <div className="relative mx-auto flex min-h-[78vh] max-w-7xl flex-col justify-center px-4 py-20 text-white">
         <p className="animate-fadeUp font-display text-5xl font-extrabold tracking-tight sm:text-7xl lg:text-8xl">
-          Domo<span className="text-volt-bright">Volt</span>
+          Texno<span className="text-volt-bright">House</span>
         </p>
         <h1
           className="mt-5 max-w-2xl animate-fadeUp text-2xl font-semibold leading-tight text-white/95 sm:text-4xl"

@@ -1,5 +1,5 @@
 /**
- * Seed DomoVolt SQLite DB from scraped TexnoHouse catalog.
+ * Seed TexnoHouse SQLite DB from scraped TexnoHouse catalog.
  * Run: npx tsx scripts/seed.ts
  */
 import fs from "fs";
@@ -10,7 +10,7 @@ import Database from "better-sqlite3";
 const root = process.cwd();
 const catalogPath = path.join(root, "data", "catalog.json");
 const pagesPath = path.join(root, "data", "pages_clean.json");
-const dbPath = path.join(root, "data", "domovolt.db");
+const dbPath = path.join(root, "data", "texnohouse.db");
 
 type CatalogProduct = {
   id: number;
@@ -61,10 +61,10 @@ function translitSlug(slug: string): string {
 
 function replaceBrand(html: string): string {
   return html
-    .replace(/texnohouse\.com/gi, "domovolt.bg")
-    .replace(/Texno House/gi, "DomoVolt")
-    .replace(/TexnoHouse/gi, "DomoVolt")
-    .replace(/texnohouse/gi, "domovolt");
+    .replace(/texnohouse\.com/gi, "texnohouse.com")
+    .replace(/Texno House/gi, "TexnoHouse")
+    .replace(/TexnoHouse/gi, "TexnoHouse")
+    .replace(/texnohouse/gi, "texnohouse");
 }
 
 if (!fs.existsSync(catalogPath)) {
@@ -160,10 +160,10 @@ const setSetting = db.prepare(
 );
 
 const site = {
-  brandName: "DomoVolt",
+  brandName: "TexnoHouse",
   tagline: "Всичко за дома и кухнята",
   phone: "+359 883 349 895",
-  email: "office@domovolt.bg",
+  email: "office@texnohouse.com",
   address: 'гр. София, жк. "Лев Толстой" бл.40 вх. A ет.3 ап.9',
   company: '"АДИ ЕЛЕКТРОНИКС" ЕООД',
   eik: "206467532",
@@ -171,7 +171,7 @@ const site = {
   currencySymbol: "€",
   freeShippingFrom: 50,
   announcement: "Безплатна доставка над 50 € · Бърза обработка на поръчки",
-  logoText: "DomoVolt",
+  logoText: "TexnoHouse",
 };
 
 const header = {
@@ -200,7 +200,7 @@ const header = {
 
 const footer = {
   showNewsletter: false,
-  bottomText: "© DomoVolt. Всички права запазени.",
+  bottomText: "© TexnoHouse. Всички права запазени.",
   social: [],
   columns: [
     {
@@ -340,13 +340,13 @@ const tx = db.transaction(() => {
     let content = replaceBrand(pg.content || "");
     let title = replaceBrand(pg.title || "");
     if (slug === "about-us") {
-      content = `<p><strong>DomoVolt</strong> е онлайн магазин за електроуреди и кухненски аксесоари. Ние ценим мнението на клиентите и предлагаме продукти с високо качество на оптимални цени. Благодарение на натрупания опит и квалифицирани кадри сме дълги години на пазара.</p>
-<p>Фирма – „АДИ ЕЛЕКТРОНИКС“ ЕООД<br/>ЕИК: 206467532<br/>Адрес: гр. София, жк. „Лев Толстой“ бл.40 вх. A ет.3 ап.9<br/>Телефон: 0883349895<br/>Email: office@domovolt.bg</p>`;
+      content = `<p><strong>TexnoHouse</strong> е онлайн магазин за електроуреди и кухненски аксесоари. Ние ценим мнението на клиентите и предлагаме продукти с високо качество на оптимални цени. Благодарение на натрупания опит и квалифицирани кадри сме дълги години на пазара.</p>
+<p>Фирма – „АДИ ЕЛЕКТРОНИКС“ ЕООД<br/>ЕИК: 206467532<br/>Адрес: гр. София, жк. „Лев Толстой“ бл.40 вх. A ет.3 ап.9<br/>Телефон: 0883349895<br/>Email: office@texnohouse.com</p>`;
     }
     if (slug === "contact-us") {
       content = `<p>Свържете се с нас – ще се радваме да ви помогнем.</p>
 <p><strong>Телефон:</strong> <a href="tel:+359883349895">+359 883 349 895</a><br/>
-<strong>Email:</strong> <a href="mailto:office@domovolt.bg">office@domovolt.bg</a><br/>
+<strong>Email:</strong> <a href="mailto:office@texnohouse.com">office@texnohouse.com</a><br/>
 <strong>Адрес:</strong> гр. София, жк. „Лев Толстой“ бл.40 вх. A ет.3 ап.9</p>`;
     }
     if (slug === "katalog" || slug === "home-page") {
@@ -380,7 +380,7 @@ const tx = db.transaction(() => {
     });
   }
 
-  const hash = bcrypt.hashSync(process.env.ADMIN_PASSWORD || "DomoVolt2026!", 10);
+  const hash = bcrypt.hashSync(process.env.ADMIN_PASSWORD || "TexnoHouse2026!", 10);
   db.prepare("INSERT INTO admin_users (username, password_hash) VALUES (?, ?)").run(
     process.env.ADMIN_USER || "admin",
     hash
@@ -394,6 +394,6 @@ const counts = {
   categories: (db.prepare("SELECT COUNT(*) as c FROM categories").get() as { c: number }).c,
   pages: (db.prepare("SELECT COUNT(*) as c FROM pages").get() as { c: number }).c,
 };
-console.log("Seeded DomoVolt DB:", counts);
-console.log("Admin: admin / DomoVolt2026!");
+console.log("Seeded TexnoHouse DB:", counts);
+console.log("Admin: admin / TexnoHouse2026!");
 db.close();

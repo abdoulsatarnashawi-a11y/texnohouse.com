@@ -1,11 +1,11 @@
 import { cookies } from "next/headers";
 import { createHmac, timingSafeEqual } from "crypto";
 
-const COOKIE = "domovolt_admin";
+const COOKIE = "texnohouse_admin";
 const MAX_AGE = 60 * 60 * 24 * 7; // 7 days
 
 function secret() {
-  return process.env.ADMIN_SECRET || "domovolt-dev-secret-change-me";
+  return process.env.ADMIN_SECRET || "texnohouse-dev-secret-change-me";
 }
 
 function sign(payload: string) {

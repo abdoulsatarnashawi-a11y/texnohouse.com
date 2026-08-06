@@ -23,7 +23,7 @@ export default async function AdminDashboard() {
   return (
     <div>
       <h1 className="font-display text-3xl font-bold">Табло</h1>
-      <p className="mt-2 text-white/60">Здравей, {user}. Управлявай DomoVolt оттук.</p>
+      <p className="mt-2 text-white/60">Здравей, {user}. Управлявай TexnoHouse оттук.</p>
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {cards.map((c) => (
           <Link

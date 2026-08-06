@@ -14,7 +14,7 @@ export function SiteFooter({
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div className="sm:col-span-2 lg:col-span-1">
           <p className="font-display text-3xl font-extrabold tracking-tight">
-            Domo<span className="text-volt-bright">Volt</span>
+            Texno<span className="text-volt-bright">House</span>
           </p>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/70">
             {settings.tagline}. Качествени електроуреди и кухненски аксесоари с

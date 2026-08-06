@@ -13,7 +13,7 @@ OUT = Path(__file__).resolve().parents[1] / "data" / "catalog.json"
 
 
 def get(url: str):
-    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 DomoVoltImporter/1.0"})
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 TexnoHouseImporter/1.0"})
     with urllib.request.urlopen(req, timeout=60) as r:
         headers = {k.lower(): v for k, v in r.headers.items()}
         return json.loads(r.read().decode("utf-8")), headers
@@ -120,7 +120,7 @@ def main():
 
     out = {
         "source": "https://www.texnohouse.com/",
-        "brand_new": "DomoVolt",
+        "brand_new": "TexnoHouse",
         "tagline": "Всичко за дома и кухнята",
         "scraped_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "counts": {

@@ -36,7 +36,7 @@ export default function AdminLoginForm() {
       className="w-full max-w-md rounded-2xl border border-white/10 bg-white/5 p-8 shadow-2xl"
     >
       <h1 className="font-display text-3xl font-bold">
-        Domo<span className="text-teal-400">Volt</span>
+        Texno<span className="text-teal-400">House</span>
       </h1>
       <p className="mt-2 text-sm text-white/60">Админ вход</p>
       <label className="mt-8 block text-sm">

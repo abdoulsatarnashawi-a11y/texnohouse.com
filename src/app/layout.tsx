@@ -17,11 +17,11 @@ const body = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "DomoVolt — Електроуреди и кухненски аксесоари",
-    template: "%s · DomoVolt",
+    default: "TexnoHouse — Електроуреди и кухненски аксесоари",
+    template: "%s · TexnoHouse",
   },
   description:
-    "Онлайн магазин DomoVolt — електроуреди, кухненски съдове и аксесоари за дома.",
+    "Онлайн магазин TexnoHouse — електроуреди, кухненски съдове и аксесоари за дома.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
