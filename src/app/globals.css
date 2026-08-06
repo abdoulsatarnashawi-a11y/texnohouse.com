@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #eef2f7;
+  --foreground: #0b1220;
+  --volt: #0d9488;
+  --ink: #0b1220;
+  --surface: rgba(255, 255, 255, 0.78);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(20, 184, 166, 0.18), transparent 55%),
+    radial-gradient(900px 500px at 90% 0%, rgba(232, 93, 4, 0.12), transparent 50%),
+    linear-gradient(180deg, #f7f9fc 0%, #e8eef6 48%, #eef2f7 100%);
+  min-height: 100vh;
+}
+
+body::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.35;
+  background-image:
+    linear-gradient(rgba(11, 18, 32, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 18, 32, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+.prose-store h1,
+.prose-store h2,
+.prose-store h3 {
+  font-family: var(--font-display), system-ui, sans-serif;
+  color: #0b1220;
+  margin: 1.2em 0 0.5em;
+  line-height: 1.2;
+}
+
+.prose-store p,
+.prose-store li {
+  color: #334155;
+  line-height: 1.7;
+  margin: 0.75em 0;
+}
+
+.prose-store a {
+  color: #0d9488;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose-store img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.glass {
+  background: var(--surface);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-volt px-5 py-3 text-sm font-semibold text-white shadow-lift transition hover:bg-volt-dim active:scale-[0.98];
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl border border-ink/10 bg-white/70 px-5 py-3 text-sm font-semibold text-ink transition hover:border-volt/40 hover:text-volt;
+}
