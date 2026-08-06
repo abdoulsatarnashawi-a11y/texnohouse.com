@@ -43,7 +43,7 @@ export default function SettingsClient({ initial }: { initial: SiteSettings }) {
         </label>
       ))}
       <label className="block text-sm">
-        Безплатна доставка от (лв.)
+        Безплатна доставка от (€)
         <input
           type="number"
           value={s.freeShippingFrom}

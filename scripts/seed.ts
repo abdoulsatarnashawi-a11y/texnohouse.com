@@ -43,6 +43,13 @@ function toPrice(raw: string | number | null | undefined, minor = 2): number {
   return Number((n / Math.pow(10, minor)).toFixed(2));
 }
 
+/** Official fixed rate: 1 EUR = 1.95583 BGN */
+const BGN_PER_EUR = 1.95583;
+
+function toEur(bgn: number): number {
+  return Number((bgn / BGN_PER_EUR).toFixed(2));
+}
+
 function translitSlug(slug: string): string {
   // Keep Cyrillic slugs as-is (URL-encoded by Next). Also fix WP percent-encoding leftovers.
   try {
@@ -98,7 +105,7 @@ db.exec(`
     regular_price REAL NOT NULL DEFAULT 0,
     sale_price REAL,
     on_sale INTEGER DEFAULT 0,
-    currency TEXT DEFAULT 'BGN',
+    currency TEXT DEFAULT 'EUR',
     is_in_stock INTEGER DEFAULT 1,
     average_rating REAL DEFAULT 0,
     review_count INTEGER DEFAULT 0,
@@ -160,10 +167,10 @@ const site = {
   address: 'гр. София, жк. "Лев Толстой" бл.40 вх. A ет.3 ап.9',
   company: '"АДИ ЕЛЕКТРОНИКС" ЕООД',
   eik: "206467532",
-  currency: "BGN",
-  currencySymbol: "лв.",
-  freeShippingFrom: 100,
-  announcement: "Безплатна доставка над 100 лв. · Бърза обработка на поръчки",
+  currency: "EUR",
+  currencySymbol: "€",
+  freeShippingFrom: 50,
+  announcement: "Безплатна доставка над 50 € · Бърза обработка на поръчки",
   logoText: "DomoVolt",
 };
 
@@ -289,9 +296,11 @@ const tx = db.transaction(() => {
     if (usedSlugs.has(slug)) slug = `${slug}-${p.id}`;
     usedSlugs.add(slug);
     const minor = p.prices?.currency_minor_unit ?? 2;
-    const price = toPrice(p.prices?.price, minor);
-    const regular = toPrice(p.prices?.regular_price, minor);
-    const sale = p.on_sale ? toPrice(p.prices?.sale_price || p.prices?.price, minor) : null;
+    const price = toEur(toPrice(p.prices?.price, minor));
+    const regular = toEur(toPrice(p.prices?.regular_price, minor));
+    const sale = p.on_sale
+      ? toEur(toPrice(p.prices?.sale_price || p.prices?.price, minor))
+      : null;
     const cats = (p.categories || []).map((c) => ({
       ...c,
       slug: translitSlug(c.slug),
@@ -308,7 +317,7 @@ const tx = db.transaction(() => {
       regular_price: regular || price,
       sale_price: sale,
       on_sale: p.on_sale ? 1 : 0,
-      currency: p.prices?.currency_code || "BGN",
+      currency: "EUR",
       is_in_stock: p.is_in_stock ? 1 : 0,
       average_rating: Number(p.average_rating) || 0,
       review_count: p.review_count || 0,

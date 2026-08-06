@@ -64,11 +64,11 @@ export default async function AdminProductsPage({
                   </Link>
                   {p.on_sale ? (
                     <span className="ml-2 rounded bg-orange-500/20 px-1.5 py-0.5 text-[10px] text-orange-300">
-                      SALE
+                      НАМАЛЕНИЕ
                     </span>
                   ) : null}
                 </td>
-                <td className="px-4 py-3">{p.price.toFixed(2)} лв.</td>
+                <td className="px-4 py-3">{p.price.toFixed(2)} €</td>
                 <td className="px-4 py-3">{p.status}</td>
                 <td className="px-4 py-3 text-right">
                   <Link href={`/admin/products/${p.id}`} className="text-teal-300">

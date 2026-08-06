@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AddToCartButton } from "@/components/store/AddToCartButton";
 import { ProductCard } from "@/components/store/ProductCard";
-import { formatEuroHint, formatPrice } from "@/lib/money";
+import { formatPrice } from "@/lib/money";
 import {
   getProductBySlug,
   listProducts,
@@ -114,7 +114,6 @@ export default async function ProductPage({
             <span className="text-3xl font-extrabold text-ink">
               {formatPrice(product.price)}
             </span>
-            <span className="text-sm text-ink-muted">{formatEuroHint(product.price)}</span>
             {product.on_sale && product.regular_price > product.price ? (
               <span className="text-lg text-ink-muted line-through">
                 {formatPrice(product.regular_price)}
@@ -124,7 +123,7 @@ export default async function ProductPage({
 
           <p className="mt-3 text-sm text-ink-muted">
             {product.is_in_stock ? "В наличност" : "Изчерпан"}
-            {product.sku ? ` · SKU: ${product.sku}` : null}
+            {product.sku ? ` · Код: ${product.sku}` : null}
           </p>
 
           <div className="mt-8">

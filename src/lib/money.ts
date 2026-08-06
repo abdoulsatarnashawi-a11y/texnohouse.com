@@ -1,6 +1,13 @@
+/** Official BGN→EUR fixed rate (Bulgaria). Source catalog prices are in BGN. */
+export const BGN_PER_EUR = 1.95583;
+
+export function bgnToEur(bgn: number): number {
+  return Number((bgn / BGN_PER_EUR).toFixed(2));
+}
+
 export function formatPrice(
   amount: number,
-  currencySymbol = "лв.",
+  currencySymbol = "€",
   locale = "bg-BG"
 ): string {
   const formatted = new Intl.NumberFormat(locale, {
@@ -8,10 +15,4 @@ export function formatPrice(
     maximumFractionDigits: 2,
   }).format(amount);
   return `${formatted} ${currencySymbol}`;
-}
-
-export function formatEuroHint(bgn: number): string {
-  // Approximate display only — BGN fixed to EUR at 1.95583
-  const eur = bgn / 1.95583;
-  return `(${eur.toFixed(2)}€)`;
 }

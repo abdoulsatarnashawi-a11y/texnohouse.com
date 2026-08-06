@@ -46,7 +46,7 @@ function ensureSchema(database: Database.Database) {
       regular_price REAL NOT NULL DEFAULT 0,
       sale_price REAL,
       on_sale INTEGER DEFAULT 0,
-      currency TEXT DEFAULT 'BGN',
+      currency TEXT DEFAULT 'EUR',
       is_in_stock INTEGER DEFAULT 1,
       average_rating REAL DEFAULT 0,
       review_count INTEGER DEFAULT 0,

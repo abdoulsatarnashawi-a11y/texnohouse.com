@@ -17,10 +17,10 @@ export const defaultSettings: SiteSettings = {
   address: 'гр. София, жк. "Лев Толстой" бл.40 вх. A ет.3 ап.9',
   company: '"АДИ ЕЛЕКТРОНИКС" ЕООД',
   eik: "206467532",
-  currency: "BGN",
-  currencySymbol: "лв.",
-  freeShippingFrom: 100,
-  announcement: "Безплатна доставка над 100 лв. · Бърза обработка на поръчки",
+  currency: "EUR",
+  currencySymbol: "€",
+  freeShippingFrom: 50,
+  announcement: "Безплатна доставка над 50 € · Бърза обработка на поръчки",
   logoText: "DomoVolt",
 };
 

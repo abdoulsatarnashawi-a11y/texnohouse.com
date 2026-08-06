@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { formatEuroHint, formatPrice } from "@/lib/money";
+import { formatPrice } from "@/lib/money";
 import { parseImages } from "@/lib/store";
 import type { ProductRow } from "@/lib/types";
 import { AddToCartButton } from "./AddToCartButton";
@@ -41,7 +41,6 @@ export function ProductCard({ product }: { product: ProductRow }) {
             <span className="text-lg font-bold text-ink">
               {formatPrice(product.price)}
             </span>
-            <span className="text-xs text-ink-muted">{formatEuroHint(product.price)}</span>
           </div>
           {onSale && product.regular_price > product.price ? (
             <p className="text-xs text-ink-muted line-through">
