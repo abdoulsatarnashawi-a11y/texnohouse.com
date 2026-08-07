@@ -1,5 +1,6 @@
 import { SiteHeader } from "@/components/store/Header";
 import { SiteFooter } from "@/components/store/Footer";
+import { PageNavigationControls } from "@/components/store/PageNavigationControls";
 import {
   getAllCategories,
   getFooterConfig,
@@ -21,6 +22,7 @@ export default function StoreLayout({ children }: { children: React.ReactNode })
       <SiteHeader settings={settings} header={header} categories={categories} />
       <main className="flex-1">{children}</main>
       <SiteFooter settings={settings} footer={footer} />
+      <PageNavigationControls />
     </div>
   );
 }
