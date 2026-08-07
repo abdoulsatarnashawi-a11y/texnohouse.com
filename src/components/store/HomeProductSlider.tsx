@@ -91,7 +91,7 @@ export function HomeProductSlider({ products }: { products: ProductRow[] }) {
 
           <Link
             href={`/product/${encodeURIComponent(product.slug)}`}
-            className="relative order-1 mx-auto flex h-64 w-full max-w-lg items-center justify-center overflow-hidden rounded-3xl bg-white/60 p-5 shadow-lift animate-fadeUp lg:order-2 lg:h-96"
+            className="relative order-1 mx-auto flex h-64 w-full max-w-lg items-center justify-center overflow-hidden rounded-3xl bg-transparent p-5 animate-fadeUp lg:order-2 lg:h-96"
           >
             <Image
               key={image}
