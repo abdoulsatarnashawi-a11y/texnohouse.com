@@ -231,11 +231,11 @@ export function SiteHeader({
               </button>
             </div>
             <div ref={categoryListRef} className="flex-1 overflow-y-auto scroll-smooth">
-              <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-4 gap-y-3 px-4 py-4 sm:grid-cols-3 sm:px-8 lg:grid-cols-4 xl:grid-cols-5">
+              <div className="mx-auto max-w-7xl columns-1 gap-3 px-4 py-3 sm:columns-2 sm:px-8 lg:columns-3 xl:columns-4">
                 {topCategories.map((category) => {
                   const descendants = descendantsOf(category.id);
                   return (
-                    <section key={category.id} className="rounded-xl border border-ink/5 bg-white p-2 shadow-sm">
+                    <section key={category.id} className="mb-2 break-inside-avoid rounded-xl border border-ink/5 bg-white p-2 shadow-sm">
                       <Link
                         href={`/category/${encodeURIComponent(category.slug)}`}
                         onClick={() => setCategoriesOpen(false)}
