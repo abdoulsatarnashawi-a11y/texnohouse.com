@@ -8,11 +8,11 @@ import { formatPrice } from "@/lib/money";
 import type { ProductRow } from "@/lib/types";
 
 const slideBackgrounds = [
-  "from-teal-100 via-cyan-50 to-white",
-  "from-orange-100 via-amber-50 to-white",
-  "from-violet-100 via-fuchsia-50 to-white",
-  "from-sky-100 via-blue-50 to-white",
-  "from-rose-100 via-pink-50 to-white",
+  "from-[#bff3ed] via-[#d7f6ff] to-[#dfeaff]",
+  "from-[#ffe1b9] via-[#fff0c9] to-[#ffd8e1]",
+  "from-[#e1d3ff] via-[#f5dfff] to-[#d9efff]",
+  "from-[#c6eaff] via-[#d4f5ff] to-[#d5f5e9]",
+  "from-[#ffd1dc] via-[#ffe3c5] to-[#fff0ae]",
 ];
 
 function productImage(product: ProductRow) {
