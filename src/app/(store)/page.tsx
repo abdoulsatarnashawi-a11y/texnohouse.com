@@ -4,6 +4,7 @@ import { HomeProductSlider } from "@/components/store/HomeProductSlider";
 import { CategoryStrip } from "@/components/store/CategoryStrip";
 import { ProductCard } from "@/components/store/ProductCard";
 import { listProducts, getTopCategories } from "@/lib/store";
+import { SLIDER_TRANSPARENT_IMAGES } from "@/lib/sliderImages";
 
 export default function HomePage() {
   const featured = listProducts({ featured: true, perPage: 8, sort: "newest" });
@@ -13,7 +14,11 @@ export default function HomePage() {
 
   return (
     <>
-      <HomeProductSlider products={sliderProducts.items} />
+      <HomeProductSlider
+        products={sliderProducts.items.filter((product) =>
+          SLIDER_TRANSPARENT_IMAGES.has(product.id)
+        )}
+      />
       <TrustBar />
       <CategoryStrip categories={cats} />
 

@@ -81,7 +81,20 @@ def main() -> None:
             with urllib.request.urlopen(request, timeout=45) as response:
                 source = Image.open(response).copy()
             target = OUTPUT_DIR / f"{product_id}.png"
-            remove_edge_background(source).save(target, "PNG", optimize=True)
+            transparent = remove_edge_background(source)
+            corners = (
+                transparent.getpixel((0, 0))[3],
+                transparent.getpixel((transparent.width - 1, 0))[3],
+                transparent.getpixel((0, transparent.height - 1))[3],
+                transparent.getpixel((transparent.width - 1, transparent.height - 1))[3],
+            )
+            # Full-bleed artwork cannot be presented as a transparent product
+            # image. Exclude it from the slider rather than showing a rectangle.
+            if max(corners) > 10:
+                target.unlink(missing_ok=True)
+                print(f"Skipped {product_id}: no removable outer background")
+                continue
+            transparent.save(target, "PNG", optimize=True)
             processed.append(product_id)
             print(f"Processed {product_id}")
         except Exception as error:
