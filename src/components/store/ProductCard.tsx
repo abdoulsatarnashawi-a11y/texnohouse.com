@@ -3,7 +3,7 @@ import Image from "next/image";
 import { formatPrice } from "@/lib/money";
 import { parseImages } from "@/lib/store";
 import type { ProductRow } from "@/lib/types";
-import { AddToCartButton } from "./AddToCartButton";
+import { BuyNowButton } from "./AddToCartButton";
 import { ProductStatusDots } from "./ProductStatusDots";
 
 export function ProductCard({ product }: { product: ProductRow }) {
@@ -51,16 +51,23 @@ export function ProductCard({ product }: { product: ProductRow }) {
           ) : null}
         </div>
 
-        <AddToCartButton
-          product={{
-            id: product.id,
-            name: product.name,
-            slug: product.slug,
-            price: product.price,
-            image: src,
-          }}
-          compact
-        />
+        <div className="grid grid-cols-2 gap-2">
+          <BuyNowButton
+            product={{
+              id: product.id,
+              name: product.name,
+              slug: product.slug,
+              price: product.price,
+              image: src,
+            }}
+          />
+          <Link
+            href={`/product/${encodeURIComponent(product.slug)}`}
+            className="inline-flex items-center justify-center rounded-xl border border-ink/10 bg-white px-2 py-2.5 text-xs font-bold text-ink transition hover:border-volt hover:text-volt"
+          >
+            Виж детайли
+          </Link>
+        </div>
       </div>
     </article>
   );
