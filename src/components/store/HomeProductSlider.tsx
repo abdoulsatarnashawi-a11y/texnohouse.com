@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight, ShoppingBag } from "lucide-react";
 import { useEffect, useState } from "react";
 import { formatPrice } from "@/lib/money";
+import { SLIDER_TRANSPARENT_IMAGES } from "@/lib/sliderImages";
 import type { ProductRow } from "@/lib/types";
 
 const slideBackgrounds = [
@@ -15,10 +16,8 @@ const slideBackgrounds = [
   "from-[#171717] via-[#303030] to-[#5a6270]",
 ];
 
-const transparentSliderImages = new Set([14965, 14963, 14954, 14943, 14924]);
-
 function productImage(product: ProductRow) {
-  if (transparentSliderImages.has(product.id)) {
+  if (SLIDER_TRANSPARENT_IMAGES.has(product.id)) {
     return `/slider-products/${product.id}.png`;
   }
   try {

@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "seed": "tsx scripts/seed.ts",
-    "scrape": "python3 scripts/scrape_texnohouse.py"
+    "scrape": "python3 scripts/scrape_texnohouse.py",
+    "prepare-slider-images": "python3 scripts/prepare_slider_images.py"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
