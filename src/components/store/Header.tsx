@@ -2,20 +2,24 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, Search, ShoppingBag, X, Phone } from "lucide-react";
+import { ChevronRight, Menu, Search, ShoppingBag, X, Phone } from "lucide-react";
 import { useCart } from "@/context/CartContext";
-import type { HeaderConfig, SiteSettings } from "@/lib/types";
+import type { CategoryRow, HeaderConfig, SiteSettings } from "@/lib/types";
 
 export function SiteHeader({
   settings,
   header,
+  categories,
 }: {
   settings: SiteSettings;
   header: HeaderConfig;
+  categories: CategoryRow[];
 }) {
   const { count } = useCart();
   const [open, setOpen] = useState(false);
+  const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [q, setQ] = useState("");
+  const topCategories = categories.filter((category) => category.parent_id === 0 && category.count > 0);
 
   return (
     <header className="relative z-40">
@@ -38,7 +42,7 @@ export function SiteHeader({
         <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 lg:py-4">
           <button
             type="button"
-            className="rounded-lg p-2 text-ink lg:hidden"
+            className="rounded-lg p-2 text-ink xl:hidden"
             aria-label="Меню"
             onClick={() => setOpen(true)}
           >
@@ -53,6 +57,16 @@ export function SiteHeader({
               {settings.tagline}
             </span>
           </Link>
+
+          <button
+            type="button"
+            onClick={() => setCategoriesOpen(true)}
+            className="hidden shrink-0 items-center gap-2 rounded-xl bg-volt px-3 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-volt-dim sm:inline-flex xl:hidden"
+            aria-label="Категории"
+          >
+            <Menu className="h-4 w-4" />
+            <span className="hidden lg:inline">Категории</span>
+          </button>
 
           {header.showSearch ? (
             <form
@@ -88,8 +102,18 @@ export function SiteHeader({
           </div>
         </div>
 
-        <nav className="hidden border-t border-ink/5 lg:block">
+        <nav className="hidden border-t border-ink/5 xl:block">
           <ul className="mx-auto flex max-w-7xl items-center gap-1 px-4 py-2">
+            <li>
+              <button
+                type="button"
+                onClick={() => setCategoriesOpen(true)}
+                className="inline-flex items-center gap-2 rounded-lg bg-volt/10 px-3 py-2 text-sm font-bold text-volt transition hover:bg-volt hover:text-white"
+              >
+                <Menu className="h-4 w-4" />
+                Категории
+              </button>
+            </li>
             {header.mainMenu.map((item) => (
               <li key={item.id}>
                 <Link
@@ -112,7 +136,7 @@ export function SiteHeader({
       </div>
 
       {open ? (
-        <div className="fixed inset-0 z-50 lg:hidden">
+        <div className="fixed inset-0 z-50 xl:hidden">
           <button
             type="button"
             className="absolute inset-0 bg-ink/50"
@@ -136,6 +160,19 @@ export function SiteHeader({
               />
             </form>
             <ul className="flex-1 space-y-1 overflow-y-auto p-3">
+              <li>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOpen(false);
+                    setCategoriesOpen(true);
+                  }}
+                  className="flex w-full items-center justify-between rounded-xl bg-volt px-3 py-3 text-left text-base font-bold text-white"
+                >
+                  <span className="flex items-center gap-2"><Menu className="h-4 w-4" /> Категории</span>
+                  <ChevronRight className="h-4 w-4" />
+                </button>
+              </li>
               {header.mainMenu.map((item) => (
                 <li key={item.id}>
                   <Link
@@ -148,6 +185,67 @@ export function SiteHeader({
                 </li>
               ))}
             </ul>
+          </aside>
+        </div>
+      ) : null}
+
+      {categoriesOpen ? (
+        <div className="fixed inset-0 z-[60]">
+          <button
+            type="button"
+            className="absolute inset-0 bg-ink/50"
+            aria-label="Затвори категориите"
+            onClick={() => setCategoriesOpen(false)}
+          />
+          <aside className="absolute left-0 top-0 flex h-full w-[92%] max-w-5xl flex-col bg-white shadow-2xl animate-fadeUp">
+            <div className="flex items-center justify-between border-b border-ink/10 px-5 py-4">
+              <div>
+                <p className="font-display text-2xl font-bold text-ink">Категории</p>
+                <p className="text-sm text-ink-muted">Разгледай всички продукти</p>
+              </div>
+              <button type="button" onClick={() => setCategoriesOpen(false)} aria-label="Затвори">
+                <X className="h-6 w-6 text-ink" />
+              </button>
+            </div>
+            <div className="grid flex-1 gap-x-8 gap-y-7 overflow-y-auto p-5 sm:grid-cols-2 lg:grid-cols-3">
+              {topCategories.map((category) => {
+                const children = categories.filter((item) => item.parent_id === category.id && item.count > 0);
+                return (
+                  <section key={category.id}>
+                    <Link
+                      href={`/category/${encodeURIComponent(category.slug)}`}
+                      onClick={() => setCategoriesOpen(false)}
+                      className="font-display text-lg font-bold text-volt hover:text-volt-dim"
+                    >
+                      {category.name}
+                    </Link>
+                    {children.length ? (
+                      <ul className="mt-2 space-y-1">
+                        {children.map((child) => (
+                          <li key={child.id}>
+                            <Link
+                              href={`/category/${encodeURIComponent(child.slug)}`}
+                              onClick={() => setCategoriesOpen(false)}
+                              className="group flex items-center gap-1.5 py-1 text-sm text-ink-muted hover:text-ink"
+                            >
+                              <ChevronRight className="h-3.5 w-3.5 text-volt opacity-0 transition group-hover:opacity-100" />
+                              {child.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </section>
+                );
+              })}
+            </div>
+            <Link
+              href="/shop"
+              onClick={() => setCategoriesOpen(false)}
+              className="border-t border-ink/10 px-5 py-4 text-sm font-bold text-volt hover:bg-volt/5"
+            >
+              Виж всички продукти →
+            </Link>
           </aside>
         </div>
       ) : null}
