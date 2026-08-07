@@ -2,8 +2,17 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
-import { ChevronRight, Menu, Search, ShoppingBag, X, Phone } from "lucide-react";
+import { useRef, useState } from "react";
+import {
+  ChevronDown,
+  ChevronRight,
+  ChevronUp,
+  Menu,
+  Search,
+  ShoppingBag,
+  X,
+  Phone,
+} from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import type { CategoryRow, HeaderConfig, SiteSettings } from "@/lib/types";
 
@@ -20,6 +29,7 @@ export function SiteHeader({
   const [open, setOpen] = useState(false);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [q, setQ] = useState("");
+  const categoryListRef = useRef<HTMLDivElement>(null);
   const topCategories = categories.filter((category) => category.parent_id === 0);
   const descendantsOf = (parentId: number, depth = 0): Array<{ category: CategoryRow; depth: number }> => {
     const result: Array<{ category: CategoryRow; depth: number }> = [];
@@ -210,9 +220,9 @@ export function SiteHeader({
             aria-label="Затвори категориите"
             onClick={() => setCategoriesOpen(false)}
           />
-          <aside className="absolute left-0 top-0 flex h-full w-[92%] max-w-2xl flex-col bg-white shadow-2xl animate-fadeUp">
-            <div className="flex items-center justify-between border-b border-ink/10 px-5 py-4">
-              <div>
+          <aside className="absolute inset-0 flex h-full w-full flex-col bg-sand-warm shadow-2xl animate-fadeUp">
+            <div className="flex items-center justify-between border-b border-ink/10 bg-white px-5 py-4 sm:px-8">
+              <div className="mx-auto w-full max-w-5xl">
                 <p className="font-display text-2xl font-bold text-ink">Категории</p>
                 <p className="text-sm text-ink-muted">Разгледай всички продукти</p>
               </div>
@@ -220,46 +230,66 @@ export function SiteHeader({
                 <X className="h-6 w-6 text-ink" />
               </button>
             </div>
-            <div className="flex flex-1 flex-col overflow-y-auto divide-y divide-ink/10 px-4">
-              {topCategories.map((category) => {
-                const descendants = descendantsOf(category.id);
-                return (
-                  <section key={category.id} className="py-2">
-                    <Link
-                      href={`/category/${encodeURIComponent(category.slug)}`}
-                      onClick={() => setCategoriesOpen(false)}
-                      className="flex items-center gap-2 rounded-lg px-2 py-2 font-display text-base font-bold text-volt hover:bg-volt/5 hover:text-volt-dim"
-                    >
-                      <CategoryThumb category={category} />
-                      {category.name}
-                    </Link>
-                    {descendants.length ? (
-                      <ul>
-                        {descendants.map(({ category: child, depth }) => (
-                          <li key={child.id} style={{ paddingLeft: `${depth * 8}px` }}>
-                            <Link
-                              href={`/category/${encodeURIComponent(child.slug)}`}
-                              onClick={() => setCategoriesOpen(false)}
-                              className="group flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm text-ink-muted hover:bg-sand hover:text-ink"
-                            >
-                              <CategoryThumb category={child} />
-                              <span className="line-clamp-1">{child.name}</span>
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : null}
-                  </section>
-                );
-              })}
+            <div ref={categoryListRef} className="flex-1 overflow-y-auto scroll-smooth">
+              <div className="mx-auto flex max-w-5xl flex-col divide-y divide-ink/10 px-4 py-3 sm:px-8">
+                {topCategories.map((category) => {
+                  const descendants = descendantsOf(category.id);
+                  return (
+                    <section key={category.id} className="py-2">
+                      <Link
+                        href={`/category/${encodeURIComponent(category.slug)}`}
+                        onClick={() => setCategoriesOpen(false)}
+                        className="flex items-center gap-2 rounded-lg px-2 py-2 font-display text-base font-bold text-volt hover:bg-volt/5 hover:text-volt-dim"
+                      >
+                        <CategoryThumb category={category} />
+                        {category.name}
+                      </Link>
+                      {descendants.length ? (
+                        <ul>
+                          {descendants.map(({ category: child, depth }) => (
+                            <li key={child.id} style={{ paddingLeft: `${depth * 8}px` }}>
+                              <Link
+                                href={`/category/${encodeURIComponent(child.slug)}`}
+                                onClick={() => setCategoriesOpen(false)}
+                                className="group flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm text-ink-muted hover:bg-sand hover:text-ink"
+                              >
+                                <CategoryThumb category={child} />
+                                <span className="line-clamp-1">{child.name}</span>
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
+                    </section>
+                  );
+                })}
+              </div>
             </div>
             <Link
               href="/shop"
               onClick={() => setCategoriesOpen(false)}
-              className="border-t border-ink/10 px-5 py-4 text-sm font-bold text-volt hover:bg-volt/5"
+              className="border-t border-ink/10 bg-white px-5 py-4 text-center text-sm font-bold text-volt hover:bg-volt/5"
             >
               Виж всички продукти →
             </Link>
+            <div className="absolute bottom-16 right-4 flex flex-col gap-2 sm:right-8">
+              <button
+                type="button"
+                onClick={() => categoryListRef.current?.scrollBy({ top: -360, behavior: "smooth" })}
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-ink text-white shadow-lg transition hover:bg-volt"
+                aria-label="Нагоре"
+              >
+                <ChevronUp className="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                onClick={() => categoryListRef.current?.scrollBy({ top: 360, behavior: "smooth" })}
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-accent to-rose-500 text-white shadow-lg transition hover:scale-105"
+                aria-label="Надолу"
+              >
+                <ChevronDown className="h-5 w-5" />
+              </button>
+            </div>
           </aside>
         </div>
       ) : null}
