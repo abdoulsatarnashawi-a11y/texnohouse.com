@@ -37,6 +37,14 @@ export function HomeProductSlider({ products }: { products: ProductRow[] }) {
   if (!total) return null;
   const product = products[active];
   const image = productImage(product);
+  const titleSize =
+    product.name.length > 125
+      ? "text-xl sm:text-2xl lg:text-3xl"
+      : product.name.length > 85
+        ? "text-2xl sm:text-3xl lg:text-4xl"
+        : product.name.length > 55
+          ? "text-2xl sm:text-4xl"
+          : "text-3xl sm:text-5xl";
 
   function previous() {
     setActive((item) => (item - 1 + total) % total);
@@ -54,7 +62,7 @@ export function HomeProductSlider({ products }: { products: ProductRow[] }) {
             <p className="inline-flex rounded-full bg-white px-3 py-1 text-xs font-bold uppercase tracking-wider text-volt shadow-sm">
               Избрано предложение
             </p>
-            <h1 className="mt-4 max-w-xl font-display text-3xl font-extrabold leading-tight text-ink sm:text-5xl">
+            <h1 className={`mt-4 max-w-xl font-display font-extrabold leading-tight text-ink ${titleSize}`}>
               {product.name}
             </h1>
             <p className="mt-5 text-3xl font-extrabold text-ink">
