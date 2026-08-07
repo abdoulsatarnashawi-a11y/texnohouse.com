@@ -27,6 +27,7 @@ export default function SettingsClient({ initial }: { initial: SiteSettings }) {
     { key: "eik", label: "ЕИК" },
     { key: "currencySymbol", label: "Валутен символ" },
     { key: "announcement", label: "Съобщение в топ бара" },
+    { key: "heroImage", label: "URL на началното изображение" },
   ];
 
   return (

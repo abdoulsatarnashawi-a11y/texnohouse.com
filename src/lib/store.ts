@@ -22,6 +22,7 @@ export const defaultSettings: SiteSettings = {
   freeShippingFrom: 50,
   announcement: "Безплатна доставка над 50 € · Бърза обработка на поръчки",
   logoText: "TexnoHouse",
+  heroImage: "/texnohouse-hero.png",
 };
 
 export const defaultHeader: HeaderConfig = {

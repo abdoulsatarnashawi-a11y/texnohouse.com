@@ -18,6 +18,7 @@ export type SiteSettings = {
   freeShippingFrom: number;
   announcement: string;
   logoText: string;
+  heroImage: string;
 };
 
 export type HeaderConfig = {

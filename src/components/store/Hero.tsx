@@ -1,16 +1,14 @@
 import Link from "next/link";
 import { ArrowRight, ShieldCheck, Truck, Headphones } from "lucide-react";
+import type { SiteSettings } from "@/lib/types";
 
-const HERO_IMG =
-  "https://www.texnohouse.com/wp-content/uploads/2022/11/espreso-kafemasina-homa-hcm-7517-850w-20-bara-1-2l-62bd6b128e9ac_1280x1280.jpeg";
-
-export function Hero() {
+export function Hero({ settings }: { settings: SiteSettings }) {
   return (
     <section className="relative min-h-[78vh] overflow-hidden">
       {/* Full-bleed product atmosphere */}
       <div
         className="absolute inset-0 scale-105 bg-cover bg-center"
-        style={{ backgroundImage: `url('${HERO_IMG}')` }}
+        style={{ backgroundImage: `url('${settings.heroImage}')` }}
         aria-hidden
       />
       <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/45" />

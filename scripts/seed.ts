@@ -172,6 +172,7 @@ const site = {
   freeShippingFrom: 50,
   announcement: "Безплатна доставка над 50 € · Бърза обработка на поръчки",
   logoText: "TexnoHouse",
+  heroImage: "/texnohouse-hero.png",
 };
 
 const header = {
@@ -276,6 +277,8 @@ const slugMap: Record<string, string> = {
   "contact-us": "contact-us",
 };
 
+const categoryImages = new Map<number, string>();
+
 const tx = db.transaction(() => {
   for (const [i, c] of catalog.categories.entries()) {
     insertCat.run({
@@ -305,6 +308,14 @@ const tx = db.transaction(() => {
       ...c,
       slug: translitSlug(c.slug),
     }));
+    const productImage = p.images?.[0] as { src?: string } | undefined;
+    if (productImage?.src) {
+      for (const category of cats) {
+        if (!categoryImages.has(category.id)) {
+          categoryImages.set(category.id, productImage.src);
+        }
+      }
+    }
 
     insertProduct.run({
       id: p.id,
@@ -331,6 +342,30 @@ const tx = db.transaction(() => {
     for (const c of cats) {
       if (c.id) insertPC.run(p.id, c.id);
     }
+  }
+
+  // Product categories do not include thumbnails in the public API. Use the
+  // first real product image in each category, including parents, as a useful
+  // default that can later be changed in the admin panel.
+  const parentById = new Map<number, number>(
+    catalog.categories.map((category: { id: number; parent?: number }) => [
+      category.id,
+      category.parent || 0,
+    ])
+  );
+  for (const [categoryId, image] of [...categoryImages]) {
+    let parentId = parentById.get(categoryId) || 0;
+    while (parentId) {
+      if (!categoryImages.has(parentId)) categoryImages.set(parentId, image);
+      parentId = parentById.get(parentId) || 0;
+    }
+  }
+  const updateCategoryImage = db.prepare(
+    "UPDATE categories SET image = ? WHERE id = ? AND (image IS NULL OR image = '')"
+  );
+  for (const category of catalog.categories) {
+    const image = categoryImages.get(category.id);
+    if (image) updateCategoryImage.run(image, category.id);
   }
 
   // CMS pages

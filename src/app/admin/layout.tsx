@@ -28,6 +28,7 @@ export default async function AdminLayout({
             {[
               ["/admin", "Табло"],
               ["/admin/products", "Продукти"],
+              ["/admin/categories", "Категории"],
               ["/admin/pages", "Страници"],
               ["/admin/header", "Хедър"],
               ["/admin/footer", "Футър"],
@@ -58,6 +59,7 @@ export default async function AdminLayout({
               {[
                 ["/admin", "Табло"],
                 ["/admin/products", "Продукти"],
+                ["/admin/categories", "Категории"],
                 ["/admin/header", "Хедър"],
                 ["/admin/footer", "Футър"],
                 ["/admin/pages", "Страници"],

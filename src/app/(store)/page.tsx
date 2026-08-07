@@ -2,16 +2,17 @@ import Link from "next/link";
 import { Hero, TrustBar } from "@/components/store/Hero";
 import { CategoryStrip } from "@/components/store/CategoryStrip";
 import { ProductCard } from "@/components/store/ProductCard";
-import { listProducts, getTopCategories } from "@/lib/store";
+import { listProducts, getSiteSettings, getTopCategories } from "@/lib/store";
 
 export default function HomePage() {
   const featured = listProducts({ featured: true, perPage: 8, sort: "newest" });
   const sale = listProducts({ sale: true, perPage: 8, sort: "popular" });
-  const cats = getTopCategories(8);
+  const cats = getTopCategories(12);
+  const settings = getSiteSettings();
 
   return (
     <>
-      <Hero />
+      <Hero settings={settings} />
       <TrustBar />
       <CategoryStrip categories={cats} />
 
