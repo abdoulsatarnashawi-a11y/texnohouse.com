@@ -8,11 +8,11 @@ import { formatPrice } from "@/lib/money";
 import type { ProductRow } from "@/lib/types";
 
 const slideBackgrounds = [
-  "from-[#bff3ed] via-[#d7f6ff] to-[#dfeaff]",
-  "from-[#ffe1b9] via-[#fff0c9] to-[#ffd8e1]",
-  "from-[#e1d3ff] via-[#f5dfff] to-[#d9efff]",
-  "from-[#c6eaff] via-[#d4f5ff] to-[#d5f5e9]",
-  "from-[#ffd1dc] via-[#ffe3c5] to-[#fff0ae]",
+  "from-[#52cfc4] via-[#72cdea] to-[#c7edff]",
+  "from-[#28bba9] via-[#43bfe0] to-[#a8e6f3]",
+  "from-[#1aa897] via-[#48b7d7] to-[#b4e4f0]",
+  "from-[#37c8a5] via-[#59aee8] to-[#c3e5fb]",
+  "from-[#159c90] via-[#39c3ca] to-[#b9ebdc]",
 ];
 
 function productImage(product: ProductRow) {
