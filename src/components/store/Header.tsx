@@ -74,7 +74,7 @@ export function SiteHeader({
           <button
             type="button"
             onClick={() => setCategoriesOpen(true)}
-            className="hidden shrink-0 items-center gap-2 rounded-xl bg-volt px-3 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-volt-dim sm:inline-flex xl:hidden"
+            className="hidden shrink-0 items-center gap-2 rounded-xl bg-gradient-to-r from-accent to-rose-500 px-3 py-2.5 text-sm font-bold text-white shadow-lg shadow-accent/30 transition hover:scale-[1.03] hover:from-rose-500 hover:to-accent active:scale-[0.98] sm:inline-flex xl:hidden"
             aria-label="Категории"
           >
             <Menu className="h-4 w-4" />
@@ -121,7 +121,7 @@ export function SiteHeader({
               <button
                 type="button"
                 onClick={() => setCategoriesOpen(true)}
-                className="inline-flex items-center gap-2 rounded-lg bg-volt/10 px-3 py-2 text-sm font-bold text-volt transition hover:bg-volt hover:text-white"
+                className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-accent to-rose-500 px-3 py-2 text-sm font-bold text-white shadow-md shadow-accent/25 transition hover:scale-[1.03] hover:from-rose-500 hover:to-accent active:scale-[0.98]"
               >
                 <Menu className="h-4 w-4" />
                 Категории
@@ -180,7 +180,7 @@ export function SiteHeader({
                     setOpen(false);
                     setCategoriesOpen(true);
                   }}
-                  className="flex w-full items-center justify-between rounded-xl bg-volt px-3 py-3 text-left text-base font-bold text-white"
+                  className="flex w-full items-center justify-between rounded-xl bg-gradient-to-r from-accent to-rose-500 px-3 py-3 text-left text-base font-bold text-white shadow-lg shadow-accent/30"
                 >
                   <span className="flex items-center gap-2"><Menu className="h-4 w-4" /> Категории</span>
                   <ChevronRight className="h-4 w-4" />

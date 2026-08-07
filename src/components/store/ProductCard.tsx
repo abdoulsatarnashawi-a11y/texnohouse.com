@@ -23,7 +23,7 @@ export function ProductCard({ product }: { product: ProductRow }) {
         />
         {onSale ? (
           <span className="absolute left-3 top-3 rounded-lg bg-accent px-2 py-1 text-[11px] font-bold uppercase tracking-wide text-white">
-            Разпродажба
+            Намалено
           </span>
         ) : null}
       </Link>

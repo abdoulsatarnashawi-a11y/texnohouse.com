@@ -103,7 +103,7 @@ export default async function ProductPage({
         <div>
           {product.on_sale ? (
             <span className="inline-block rounded-lg bg-accent px-2.5 py-1 text-xs font-bold uppercase text-white">
-              Разпродажба
+              Намалено
             </span>
           ) : null}
           <h1 className="mt-3 font-display text-3xl font-bold leading-tight text-ink sm:text-4xl">
