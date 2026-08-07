@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AddToCartButton } from "@/components/store/AddToCartButton";
+import { ProductStatusDots } from "@/components/store/ProductStatusDots";
 import { ProductCard } from "@/components/store/ProductCard";
 import { formatPrice } from "@/lib/money";
 import {
@@ -101,11 +102,14 @@ export default async function ProductPage({
         </div>
 
         <div>
-          {product.on_sale ? (
-            <span className="inline-block rounded-lg bg-accent px-2.5 py-1 text-xs font-bold uppercase text-white">
-              Намалено
-            </span>
-          ) : null}
+          <div className="flex items-center gap-3">
+            {product.on_sale ? (
+              <span className="inline-block rounded-lg bg-accent px-2.5 py-1 text-xs font-bold uppercase text-white">
+                Намалено
+              </span>
+            ) : null}
+            <ProductStatusDots product={product} />
+          </div>
           <h1 className="mt-3 font-display text-3xl font-bold leading-tight text-ink sm:text-4xl">
             {product.name}
           </h1>

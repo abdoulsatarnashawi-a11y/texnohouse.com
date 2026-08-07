@@ -4,6 +4,7 @@ import { formatPrice } from "@/lib/money";
 import { parseImages } from "@/lib/store";
 import type { ProductRow } from "@/lib/types";
 import { AddToCartButton } from "./AddToCartButton";
+import { ProductStatusDots } from "./ProductStatusDots";
 
 export function ProductCard({ product }: { product: ProductRow }) {
   const images = parseImages(product.images_json);
@@ -26,6 +27,7 @@ export function ProductCard({ product }: { product: ProductRow }) {
             Намалено
           </span>
         ) : null}
+        <ProductStatusDots product={product} className="absolute right-3 top-3" />
       </Link>
 
       <div className="flex flex-1 flex-col gap-3 p-4">

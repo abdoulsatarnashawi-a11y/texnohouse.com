@@ -125,7 +125,7 @@ export default function ProductEditClient({
           <input name="is_in_stock" type="checkbox" defaultChecked={product ? !!product.is_in_stock : true} /> В наличност
         </label>
         <label className="flex items-center gap-2">
-          <input name="featured" type="checkbox" defaultChecked={!!product?.featured} /> Избран
+          <input name="featured" type="checkbox" defaultChecked={!!product?.featured} /> Нов продукт
         </label>
       </div>
 
