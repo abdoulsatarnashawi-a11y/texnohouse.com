@@ -8,11 +8,11 @@ import { formatPrice } from "@/lib/money";
 import type { ProductRow } from "@/lib/types";
 
 const slideBackgrounds = [
-  "from-[#52cfc4] via-[#72cdea] to-[#c7edff]",
-  "from-[#28bba9] via-[#43bfe0] to-[#a8e6f3]",
-  "from-[#1aa897] via-[#48b7d7] to-[#b4e4f0]",
-  "from-[#37c8a5] via-[#59aee8] to-[#c3e5fb]",
-  "from-[#159c90] via-[#39c3ca] to-[#b9ebdc]",
+  "from-[#05080e] via-[#182235] to-[#344256]",
+  "from-[#101216] via-[#2a3039] to-[#4b5563]",
+  "from-[#070a10] via-[#1f2937] to-[#3f4857]",
+  "from-[#111827] via-[#273244] to-[#505b6c]",
+  "from-[#171717] via-[#303030] to-[#5a6270]",
 ];
 
 function productImage(product: ProductRow) {
@@ -59,30 +59,30 @@ export function HomeProductSlider({ products }: { products: ProductRow[] }) {
       <div className={`min-h-[420px] bg-gradient-to-br ${slideBackgrounds[active % slideBackgrounds.length]} transition-colors duration-500 sm:min-h-[460px]`}>
         <div className="mx-auto grid min-h-[420px] max-w-7xl items-center gap-4 px-5 py-10 sm:min-h-[460px] sm:px-8 lg:grid-cols-2 lg:gap-12 lg:px-4">
           <div className="order-2 animate-fadeUp lg:order-1">
-            <p className="inline-flex rounded-full bg-white px-3 py-1 text-xs font-bold uppercase tracking-wider text-volt shadow-sm">
+            <p className="inline-flex rounded-full bg-white/15 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-sm ring-1 ring-white/20">
               Избрано предложение
             </p>
-            <h1 className={`mt-4 max-w-xl font-display font-extrabold leading-[1.12] tracking-[-0.025em] text-ink ${titleSize}`}>
+            <h1 className={`mt-4 max-w-xl font-display font-extrabold leading-[1.12] tracking-[-0.025em] text-white ${titleSize}`}>
               {product.name}
             </h1>
-            <p className="mt-5 text-3xl font-extrabold text-ink">
+            <p className="mt-5 text-3xl font-extrabold text-white">
               {formatPrice(product.price)}
             </p>
             {product.on_sale && product.regular_price > product.price ? (
-              <p className="mt-1 text-sm font-medium text-ink-muted line-through">
+              <p className="mt-1 text-sm font-medium text-white/60 line-through">
                 {formatPrice(product.regular_price)}
               </p>
             ) : null}
             <div className="mt-7 flex flex-wrap gap-3">
               <Link
                 href={`/product/${encodeURIComponent(product.slug)}`}
-                className="btn-primary bg-ink hover:bg-ink-soft"
+                className="btn-primary bg-white text-ink hover:bg-white/85"
               >
                 Виж детайли
               </Link>
               <Link
                 href="/shop"
-                className="btn-ghost border-ink/15 bg-white/70"
+                className="btn-ghost border-white/30 bg-white/10 text-white hover:border-white hover:text-white"
               >
                 <ShoppingBag className="h-4 w-4" /> Към магазина
               </Link>
@@ -132,7 +132,7 @@ export function HomeProductSlider({ products }: { products: ProductRow[] }) {
                 type="button"
                 onClick={() => setActive(index)}
                 className={`h-2.5 rounded-full transition-all ${
-                  index === active ? "w-7 bg-ink" : "w-2.5 bg-ink/30 hover:bg-ink/60"
+                  index === active ? "w-7 bg-white" : "w-2.5 bg-white/35 hover:bg-white/70"
                 }`}
                 aria-label={`Продукт ${index + 1}`}
               />
