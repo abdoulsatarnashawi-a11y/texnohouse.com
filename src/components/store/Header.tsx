@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { ChevronRight, Menu, Search, ShoppingBag, X, Phone } from "lucide-react";
 import { useCart } from "@/context/CartContext";
@@ -19,7 +20,19 @@ export function SiteHeader({
   const [open, setOpen] = useState(false);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [q, setQ] = useState("");
-  const topCategories = categories.filter((category) => category.parent_id === 0 && category.count > 0);
+  const topCategories = categories.filter((category) => category.parent_id === 0);
+  const descendantsOf = (parentId: number, depth = 0): Array<{ category: CategoryRow; depth: number }> => {
+    const result: Array<{ category: CategoryRow; depth: number }> = [];
+    const children = categories
+      .filter((category) => category.parent_id === parentId)
+      .sort((a, b) => a.sort_order - b.sort_order);
+
+    for (const child of children) {
+      if (child.count > 0) result.push({ category: child, depth });
+      result.push(...descendantsOf(child.id, depth + 1));
+    }
+    return result;
+  };
 
   return (
     <header className="relative z-40">
@@ -207,29 +220,30 @@ export function SiteHeader({
                 <X className="h-6 w-6 text-ink" />
               </button>
             </div>
-            <div className="grid flex-1 gap-x-8 gap-y-7 overflow-y-auto p-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid flex-1 gap-x-7 gap-y-6 overflow-y-auto p-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {topCategories.map((category) => {
-                const children = categories.filter((item) => item.parent_id === category.id && item.count > 0);
+                const descendants = descendantsOf(category.id);
                 return (
-                  <section key={category.id}>
+                  <section key={category.id} className="rounded-xl border border-ink/5 bg-sand-warm/70 p-3">
                     <Link
                       href={`/category/${encodeURIComponent(category.slug)}`}
                       onClick={() => setCategoriesOpen(false)}
-                      className="font-display text-lg font-bold text-volt hover:text-volt-dim"
+                      className="flex items-center gap-2 font-display text-base font-bold text-volt hover:text-volt-dim"
                     >
+                      <CategoryThumb category={category} />
                       {category.name}
                     </Link>
-                    {children.length ? (
-                      <ul className="mt-2 space-y-1">
-                        {children.map((child) => (
-                          <li key={child.id}>
+                    {descendants.length ? (
+                      <ul className="mt-3 space-y-1">
+                        {descendants.map(({ category: child, depth }) => (
+                          <li key={child.id} style={{ paddingLeft: `${depth * 8}px` }}>
                             <Link
                               href={`/category/${encodeURIComponent(child.slug)}`}
                               onClick={() => setCategoriesOpen(false)}
-                              className="group flex items-center gap-1.5 py-1 text-sm text-ink-muted hover:text-ink"
+                              className="group flex items-center gap-2 rounded-lg py-1 text-sm text-ink-muted hover:bg-white hover:text-ink"
                             >
-                              <ChevronRight className="h-3.5 w-3.5 text-volt opacity-0 transition group-hover:opacity-100" />
-                              {child.name}
+                              <CategoryThumb category={child} />
+                              <span className="line-clamp-1">{child.name}</span>
                             </Link>
                           </li>
                         ))}
@@ -250,5 +264,24 @@ export function SiteHeader({
         </div>
       ) : null}
     </header>
+  );
+}
+
+function CategoryThumb({ category }: { category: CategoryRow }) {
+  return (
+    <span className="relative flex h-7 w-7 shrink-0 overflow-hidden rounded-md bg-white">
+      {category.image ? (
+        <Image
+          src={category.image}
+          alt=""
+          fill
+          sizes="28px"
+          className="object-contain mix-blend-multiply p-0.5"
+          unoptimized
+        />
+      ) : (
+        <Menu className="m-auto h-3.5 w-3.5 text-volt" />
+      )}
+    </span>
   );
 }
