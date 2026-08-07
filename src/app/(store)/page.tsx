@@ -7,12 +7,13 @@ import { listProducts, getTopCategories } from "@/lib/store";
 
 export default function HomePage() {
   const featured = listProducts({ featured: true, perPage: 8, sort: "newest" });
+  const sliderProducts = listProducts({ perPage: 60, sort: "newest" });
   const sale = listProducts({ sale: true, perPage: 8, sort: "popular" });
   const cats = getTopCategories(12);
 
   return (
     <>
-      <HomeProductSlider products={featured.items.slice(0, 5)} />
+      <HomeProductSlider products={sliderProducts.items} />
       <TrustBar />
       <CategoryStrip categories={cats} />
 

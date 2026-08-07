@@ -136,7 +136,7 @@ export function listProducts(opts: {
   featured?: boolean;
 }) {
   const page = Math.max(1, opts.page || 1);
-  const perPage = Math.min(48, Math.max(1, opts.perPage || 24));
+  const perPage = Math.min(60, Math.max(1, opts.perPage || 24));
   const where: string[] = ["p.status = 'publish'"];
   const params: unknown[] = [];
 
