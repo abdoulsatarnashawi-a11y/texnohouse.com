@@ -15,7 +15,12 @@ const slideBackgrounds = [
   "from-[#171717] via-[#303030] to-[#5a6270]",
 ];
 
+const transparentSliderImages = new Set([14965, 14963, 14954, 14943, 14924]);
+
 function productImage(product: ProductRow) {
+  if (transparentSliderImages.has(product.id)) {
+    return `/slider-products/${product.id}.png`;
+  }
   try {
     const images = JSON.parse(product.images_json) as Array<{ src?: string; thumbnail?: string }>;
     return images[0]?.src || images[0]?.thumbnail || "/placeholder-product.svg";
