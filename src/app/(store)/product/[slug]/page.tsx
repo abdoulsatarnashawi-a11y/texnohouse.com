@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AddToCartButton } from "@/components/store/AddToCartButton";
+import { ProductGallery } from "@/components/store/ProductGallery";
 import { ProductStatusDots } from "@/components/store/ProductStatusDots";
 import { ProductCard } from "@/components/store/ProductCard";
 import { formatPrice } from "@/lib/money";
@@ -69,37 +69,7 @@ export default async function ProductPage({
       </nav>
 
       <div className="grid gap-10 lg:grid-cols-2">
-        <div className="rounded-3xl border border-ink/5 bg-white/80 p-6 shadow-sm">
-          <div className="relative aspect-square overflow-hidden rounded-2xl bg-sand">
-            <Image
-              src={main}
-              alt={product.name}
-              fill
-              className="object-contain p-6"
-              sizes="(max-width:1024px) 100vw, 50vw"
-              priority
-              unoptimized
-            />
-          </div>
-          {images.length > 1 ? (
-            <div className="mt-4 grid grid-cols-4 gap-2">
-              {images.slice(0, 4).map((img, i) => (
-                <div
-                  key={img.src + i}
-                  className="relative aspect-square overflow-hidden rounded-xl bg-sand"
-                >
-                  <Image
-                    src={img.thumbnail || img.src}
-                    alt=""
-                    fill
-                    className="object-contain p-2"
-                    unoptimized
-                  />
-                </div>
-              ))}
-            </div>
-          ) : null}
-        </div>
+        <ProductGallery images={images} productName={product.name} />
 
         <div>
           <div className="flex items-center gap-3">
