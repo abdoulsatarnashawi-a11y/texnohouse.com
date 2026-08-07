@@ -210,7 +210,7 @@ export function SiteHeader({
             aria-label="Затвори категориите"
             onClick={() => setCategoriesOpen(false)}
           />
-          <aside className="absolute left-0 top-0 flex h-full w-[92%] max-w-5xl flex-col bg-white shadow-2xl animate-fadeUp">
+          <aside className="absolute left-0 top-0 flex h-full w-[92%] max-w-2xl flex-col bg-white shadow-2xl animate-fadeUp">
             <div className="flex items-center justify-between border-b border-ink/10 px-5 py-4">
               <div>
                 <p className="font-display text-2xl font-bold text-ink">Категории</p>
@@ -220,27 +220,27 @@ export function SiteHeader({
                 <X className="h-6 w-6 text-ink" />
               </button>
             </div>
-            <div className="grid flex-1 gap-x-7 gap-y-6 overflow-y-auto p-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="flex flex-1 flex-col overflow-y-auto divide-y divide-ink/10 px-4">
               {topCategories.map((category) => {
                 const descendants = descendantsOf(category.id);
                 return (
-                  <section key={category.id} className="rounded-xl border border-ink/5 bg-sand-warm/70 p-3">
+                  <section key={category.id} className="py-2">
                     <Link
                       href={`/category/${encodeURIComponent(category.slug)}`}
                       onClick={() => setCategoriesOpen(false)}
-                      className="flex items-center gap-2 font-display text-base font-bold text-volt hover:text-volt-dim"
+                      className="flex items-center gap-2 rounded-lg px-2 py-2 font-display text-base font-bold text-volt hover:bg-volt/5 hover:text-volt-dim"
                     >
                       <CategoryThumb category={category} />
                       {category.name}
                     </Link>
                     {descendants.length ? (
-                      <ul className="mt-3 space-y-1">
+                      <ul>
                         {descendants.map(({ category: child, depth }) => (
                           <li key={child.id} style={{ paddingLeft: `${depth * 8}px` }}>
                             <Link
                               href={`/category/${encodeURIComponent(child.slug)}`}
                               onClick={() => setCategoriesOpen(false)}
-                              className="group flex items-center gap-2 rounded-lg py-1 text-sm text-ink-muted hover:bg-white hover:text-ink"
+                              className="group flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm text-ink-muted hover:bg-sand hover:text-ink"
                             >
                               <CategoryThumb category={child} />
                               <span className="line-clamp-1">{child.name}</span>
