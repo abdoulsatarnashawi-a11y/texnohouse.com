@@ -231,11 +231,11 @@ export function SiteHeader({
               </button>
             </div>
             <div ref={categoryListRef} className="flex-1 overflow-y-auto scroll-smooth">
-              <div className="mx-auto flex max-w-5xl flex-col divide-y divide-ink/10 px-4 py-3 sm:px-8">
+              <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-4 gap-y-3 px-4 py-4 sm:grid-cols-3 sm:px-8 lg:grid-cols-4 xl:grid-cols-5">
                 {topCategories.map((category) => {
                   const descendants = descendantsOf(category.id);
                   return (
-                    <section key={category.id} className="py-2">
+                    <section key={category.id} className="rounded-xl border border-ink/5 bg-white p-2 shadow-sm">
                       <Link
                         href={`/category/${encodeURIComponent(category.slug)}`}
                         onClick={() => setCategoriesOpen(false)}
@@ -245,7 +245,7 @@ export function SiteHeader({
                         {category.name}
                       </Link>
                       {descendants.length ? (
-                        <ul>
+                        <ul className="mt-1 border-t border-ink/5 pt-1">
                           {descendants.map(({ category: child, depth }) => (
                             <li key={child.id} style={{ paddingLeft: `${depth * 8}px` }}>
                               <Link
