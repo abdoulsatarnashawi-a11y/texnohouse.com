@@ -12,6 +12,7 @@ import {
   ShoppingBag,
   X,
   Phone,
+  UserRound,
 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import type { CategoryRow, HeaderConfig, SiteSettings } from "@/lib/types";
@@ -108,6 +109,20 @@ export function SiteHeader({
           ) : null}
 
           <div className="ml-auto flex items-center gap-2">
+            <div className="hidden items-center gap-2 xl:flex">
+              <Link
+                href="/login"
+                className="inline-flex items-center gap-1.5 rounded-xl px-2 py-2 text-sm font-semibold text-ink-muted transition hover:text-volt"
+              >
+                <UserRound className="h-4 w-4" /> Вход
+              </Link>
+              <Link
+                href="/register"
+                className="rounded-xl border border-volt/25 bg-volt/10 px-3 py-2 text-sm font-bold text-volt transition hover:bg-volt hover:text-white"
+              >
+                Регистрация
+              </Link>
+            </div>
             {header.showCart ? (
               <Link
                 href="/cart"
@@ -195,6 +210,22 @@ export function SiteHeader({
                   <span className="flex items-center gap-2"><Menu className="h-4 w-4" /> Категории</span>
                   <ChevronRight className="h-4 w-4" />
                 </button>
+              </li>
+              <li className="mt-3 grid grid-cols-2 gap-2 border-t border-ink/10 pt-3">
+                <Link
+                  href="/login"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-center gap-1.5 rounded-xl border border-ink/10 px-3 py-2.5 text-sm font-bold text-ink"
+                >
+                  <UserRound className="h-4 w-4" /> Вход
+                </Link>
+                <Link
+                  href="/register"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-center rounded-xl bg-volt px-3 py-2.5 text-sm font-bold text-white"
+                >
+                  Регистрация
+                </Link>
               </li>
               {header.mainMenu.map((item) => (
                 <li key={item.id}>

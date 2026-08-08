@@ -100,10 +100,19 @@ function ensureSchema(database: Database.Database) {
       created_at TEXT DEFAULT CURRENT_TIMESTAMP
     );
 
+    CREATE TABLE IF NOT EXISTS customers (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      email TEXT NOT NULL UNIQUE,
+      password_hash TEXT NOT NULL,
+      created_at TEXT DEFAULT CURRENT_TIMESTAMP
+    );
+
     CREATE INDEX IF NOT EXISTS idx_products_slug ON products(slug);
     CREATE INDEX IF NOT EXISTS idx_products_status ON products(status);
     CREATE INDEX IF NOT EXISTS idx_categories_slug ON categories(slug);
     CREATE INDEX IF NOT EXISTS idx_pages_slug ON pages(slug);
+    CREATE INDEX IF NOT EXISTS idx_customers_email ON customers(email);
   `);
 }
 
