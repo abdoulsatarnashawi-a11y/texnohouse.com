@@ -3,13 +3,14 @@ import fs from "fs";
 import path from "path";
 
 const dataDir = path.join(process.cwd(), "data");
-const dbPath = path.join(dataDir, "texnohouse.db");
+const dbPath = process.env.DATABASE_PATH || path.join(dataDir, "texnohouse.db");
 
 let db: Database.Database | null = null;
 
 export function getDb() {
   if (db) return db;
-  if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+  const databaseDir = path.dirname(dbPath);
+  if (!fs.existsSync(databaseDir)) fs.mkdirSync(databaseDir, { recursive: true });
   db = new Database(dbPath);
   db.pragma("journal_mode = WAL");
   db.pragma("foreign_keys = ON");

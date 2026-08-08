@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "start:railway": "sh -c 'test -f \"${DATABASE_PATH:-data/texnohouse.db}\" || npm run seed; exec next start'",
     "lint": "next lint",
     "seed": "tsx scripts/seed.ts",
     "scrape": "python3 scripts/scrape_texnohouse.py",

@@ -10,7 +10,8 @@ import Database from "better-sqlite3";
 const root = process.cwd();
 const catalogPath = path.join(root, "data", "catalog.json");
 const pagesPath = path.join(root, "data", "pages_clean.json");
-const dbPath = path.join(root, "data", "texnohouse.db");
+const dbPath =
+  process.env.DATABASE_PATH || path.join(root, "data", "texnohouse.db");
 
 type CatalogProduct = {
   id: number;
@@ -77,6 +78,7 @@ const pagesClean = fs.existsSync(pagesPath)
   ? JSON.parse(fs.readFileSync(pagesPath, "utf8"))
   : [];
 
+fs.mkdirSync(path.dirname(dbPath), { recursive: true });
 if (fs.existsSync(dbPath)) fs.unlinkSync(dbPath);
 
 const db = new Database(dbPath);

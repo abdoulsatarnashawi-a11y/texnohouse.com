@@ -54,6 +54,25 @@ npm run seed     # يعيد بناء قاعدة البيانات
 
 > حاليًا الصور تُحمَّل من روابط الموقع الأصلي حتى يتم النقل الكامل للملفات.
 
+## النشر على Railway مع `new.texnohouse.com`
+
+1. أنشئ خدمة Railway من فرع `cursor/domovolt-ecommerce-store-32e3`.
+2. أضف Volume واربطه بالمسار `/app/storage`.
+3. أضف متغيرات البيئة:
+   ```env
+   DATABASE_PATH=/app/storage/texnohouse.db
+   ADMIN_USER=admin
+   ADMIN_PASSWORD=ضع-كلمة-مرور-قوية
+   ADMIN_SECRET=ضع-قيمة-طويلة-وعشوائية
+   ```
+4. عيّن:
+   ```text
+   Build Command: npm run build
+   Start Command: npm run start:railway
+   ```
+   الأمر يهيّئ قاعدة البيانات داخل الـVolume في أول تشغيل فقط، ولا يعيد إنشائها في عمليات إعادة النشر اللاحقة.
+5. أضف `new.texnohouse.com` في Railway Custom Domain، ثم أضف في Hostalika سجل CNAME بالقيمة التي يعرضها Railway.
+
 ## البنية
 
 - `src/app/(store)` — واجهة المتجر
